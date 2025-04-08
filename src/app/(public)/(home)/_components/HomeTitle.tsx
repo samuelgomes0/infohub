@@ -4,7 +4,7 @@ interface HomeTitleProps {
 
 function HomeTitle({ content }: HomeTitleProps) {
   return (
-    <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100">
+    <h1 className="text-6xl font-bold text-gray-800 dark:text-gray-100">
       {content}
     </h1>
   );

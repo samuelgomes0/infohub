@@ -1,3 +1,4 @@
+import { ExploreCardProps } from "@/app/interfaces";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,13 +9,6 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
-interface ExploreCardProps {
-  title: string;
-  content: string;
-  buttonText: string;
-  buttonLink: string;
-}
-
 function ExploreCard({
   title,
   content,
@@ -22,14 +16,14 @@ function ExploreCard({
   buttonLink,
 }: ExploreCardProps) {
   return (
-    <Card>
+    <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-2xl">{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-grow">
         <p>{content}</p>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex justify-end">
         <Button variant="outline" asChild>
           <Link href={buttonLink}>{buttonText}</Link>
         </Button>

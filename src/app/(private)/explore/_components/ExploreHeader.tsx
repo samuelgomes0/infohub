@@ -3,7 +3,7 @@ import Explore from ".";
 function ExploreHeader() {
   return (
     <header>
-      <div className="flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
         <Explore.Title content="Explore" />
         <Explore.SearchBar placeholderContent="Search for anything..." />
       </div>

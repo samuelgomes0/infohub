@@ -1,7 +1,10 @@
+import Footer from "@/components/Footer";
+
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-4 bg-gray-100 text-gray-800">
-      {children}
+    <div className="flex min-h-screen flex-col bg-gray-100">
+      <div className="flex flex-1 items-center justify-center">{children}</div>
+      <Footer />
     </div>
   );
 }

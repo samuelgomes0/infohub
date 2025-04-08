@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 interface HomeButtonProps {
   icon: LucideIcon;
@@ -8,9 +9,14 @@ interface HomeButtonProps {
 
 function HomeButton({ icon: Icon, content }: HomeButtonProps) {
   return (
-    <Button>
-      {Icon && <Icon />}
-      {content}
+    <Button
+      className="h-12 rounded-full bg-blue-500 text-white hover:bg-blue-600"
+      asChild
+    >
+      <Link href="/explore">
+        {Icon && <Icon />}
+        {content}
+      </Link>
     </Button>
   );
 }

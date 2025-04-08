@@ -1,11 +1,13 @@
 import HomeButton from "./HomeButton";
-import HomeQuoteCard from "./HomeQuoteCard";
+import HomeDescription from "./HomeDescription";
+import HomeSearchBar from "./HomeSearchBar";
 import HomeTitle from "./HomeTitle";
 
 const Home = {
-  Title: HomeTitle,
-  QuoteCard: HomeQuoteCard,
   Button: HomeButton,
+  Description: HomeDescription,
+  SearchBar: HomeSearchBar,
+  Title: HomeTitle,
 };
 
 export default Home;
