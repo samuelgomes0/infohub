@@ -1,13 +1,11 @@
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 
-interface HomeSearchBarProps {
+interface SearchBarProps {
   placeholder: string;
 }
 
-function HomeSearchBar({
-  placeholder: placeholderContent,
-}: HomeSearchBarProps) {
+function SearchBar({ placeholder: placeholderContent }: SearchBarProps) {
   return (
     <div className="relative flex w-full max-w-md items-center">
       <SearchIcon className="absolute top-3.5 left-4 text-gray-400" size={20} />
@@ -19,4 +17,4 @@ function HomeSearchBar({
   );
 }
 
-export default HomeSearchBar;
+export default SearchBar;

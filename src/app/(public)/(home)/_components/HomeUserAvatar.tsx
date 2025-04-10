@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +11,11 @@ import {
 function HomeUserAvatar() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger></DropdownMenuTrigger>
+      <DropdownMenuTrigger>
+        <Avatar>
+          <AvatarFallback className="bg-black text-white">SG</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />

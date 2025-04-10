@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 function LoginForm() {
   return (
@@ -37,15 +38,18 @@ function LoginForm() {
                 </div>
                 <Input id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
+              <Button
+                type="submit"
+                className="w-full bg-blue-500 hover:bg-blue-600"
+              >
                 Login
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <a href="#" className="font-semibold hover:underline">
+              <Link href="#" className="font-semibold hover:underline">
                 Sign up
-              </a>
+              </Link>
             </div>
           </form>
         </CardContent>
