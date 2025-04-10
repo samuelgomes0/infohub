@@ -1,12 +1,12 @@
 import { MiddlewareConfig, NextRequest, NextResponse } from "next/server";
 
 const publicRoutes = [
-  { path: "/sign-in", whenAuthenticated: "redirect" },
+  { path: "/login", whenAuthenticated: "redirect" },
   { path: "/sign-up", whenAuthenticated: "redirect" },
   { path: "/", whenAuthenticated: "next" },
 ] as const;
 
-const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/sign-in";
+const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 
 export function middleware(request: NextRequest) {
   console.log("Middleware triggered");
