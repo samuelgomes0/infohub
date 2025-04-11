@@ -8,13 +8,15 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import DefaultButton from "../DefaultButton";
+import UserAvatar from "../UserAvatar";
 
-interface MenuItemsProps {
+interface navMenuItems {
   href: string;
   title: string;
 }
 
-const menuItems: MenuItemsProps[] = [
+const navMenuItems: navMenuItems[] = [
   {
     href: "/",
     title: "Home",
@@ -32,13 +34,14 @@ const menuItems: MenuItemsProps[] = [
 function NavigationBar() {
   const pathname = usePathname();
   const isPathActive = (path: string) => path === pathname;
+  const isAuthenticated = false;
 
   return (
     <div className="flex w-full items-center justify-between border-b bg-white p-4">
       <div></div>
       <NavigationMenu>
         <NavigationMenuList className="flex justify-center gap-8 font-medium">
-          {menuItems.map((item, index) => (
+          {navMenuItems.map((item, index) => (
             <NavigationMenuItem key={index}>
               <Link href={item.href} legacyBehavior passHref>
                 <NavigationMenuLink
@@ -51,7 +54,15 @@ function NavigationBar() {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
-      <div>login</div>
+      {isAuthenticated ? (
+        <UserAvatar userName="SG" />
+      ) : (
+        <DefaultButton
+          content="Login"
+          url="/login"
+          className="hover:bg-primary/90 bg-primary h-10"
+        />
+      )}
     </div>
   );
 }

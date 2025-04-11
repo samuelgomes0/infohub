@@ -3,14 +3,19 @@ import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
-interface HomeButtonProps {
+interface DefaultButtonProps {
   url: string;
   icon?: LucideIcon;
   content: string;
   className?: string;
 }
 
-function HomeButton({ icon: Icon, content, url, className }: HomeButtonProps) {
+function DefaultButton({
+  icon: Icon,
+  content,
+  url,
+  className,
+}: DefaultButtonProps) {
   return (
     <Button
       className={cn(
@@ -27,4 +32,4 @@ function HomeButton({ icon: Icon, content, url, className }: HomeButtonProps) {
   );
 }
 
-export default HomeButton;
+export default DefaultButton;

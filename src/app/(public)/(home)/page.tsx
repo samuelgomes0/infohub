@@ -1,4 +1,6 @@
+import DefaultButton from "@/components/DefaultButton";
 import SearchBar from "@/components/SearchBar";
+import UserAvatar from "@/components/UserAvatar";
 import { CompassIcon } from "lucide-react";
 import Home from "./_components";
 
@@ -7,11 +9,11 @@ function HomePage() {
 
   return (
     <main className="mx-auto flex max-w-sm flex-1 flex-col items-center justify-center gap-8 text-center">
-      <div className="absolute top-5 right-5">
+      <div className="absolute top-4 right-4">
         {isAuthenticated ? (
-          <Home.UserAvatar />
+          <UserAvatar userName="SG" />
         ) : (
-          <Home.Button
+          <DefaultButton
             content="Login"
             url="/login"
             className="hover:bg-primary/90 bg-primary h-10"
@@ -24,7 +26,7 @@ function HomePage() {
       </section>
       <SearchBar placeholder="Search for knowledge..." />
       <span className="text-gray-500">or</span>
-      <Home.Button
+      <DefaultButton
         icon={CompassIcon}
         content="Discover something new!"
         url="/discovery"

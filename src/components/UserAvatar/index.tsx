@@ -8,14 +8,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-interface HomeUserAvatarProps {
+interface UserAvatarProps {
   userName: string;
-  menuItems: Array<{
-    label: string;
-  }>;
 }
 
-function HomeUserAvatar({ userName, menuItems }: HomeUserAvatarProps) {
+const userAvatarMenuItems = [
+  { label: "My Profile" },
+  { label: "Settings" },
+  { label: "Logout" },
+];
+
+function UserAvatar({ userName }: UserAvatarProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -28,7 +31,7 @@ function HomeUserAvatar({ userName, menuItems }: HomeUserAvatarProps) {
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {menuItems.map((item, index) => (
+        {userAvatarMenuItems.map((item, index) => (
           <DropdownMenuItem key={index}>{item.label}</DropdownMenuItem>
         ))}
       </DropdownMenuContent>
@@ -36,4 +39,4 @@ function HomeUserAvatar({ userName, menuItems }: HomeUserAvatarProps) {
   );
 }
 
-export default HomeUserAvatar;
+export default UserAvatar;
