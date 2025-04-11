@@ -1,33 +1,51 @@
-import { LocalStorageManager } from "@/utils";
 import { useEffect, useState } from "react";
 
-function useLike() {
-  const [likedPosts, setLikedPosts] = useState<number[]>([]);
+const STORAGE_KEY = "infohub.likedPosts";
+
+function useLike(postId: number) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const isBrowser = (): boolean => typeof window !== "undefined";
+
+  const getLikedPosts = (): number[] => {
+    if (!isBrowser()) return [];
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const saveLikedPosts = (posts: number[]): void => {
+    if (!isBrowser()) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    } catch {}
+  };
+
+  const updateLikeState = () => {
+    const posts = getLikedPosts();
+    setIsLiked(posts.includes(postId));
+  };
+
+  const toggle = () => {
+    const posts = getLikedPosts();
+    const isAlreadyLiked = posts.includes(postId);
+
+    const updatedPosts = isAlreadyLiked
+      ? posts.filter((id) => id !== postId)
+      : [...posts, postId];
+
+    saveLikedPosts(updatedPosts);
+    setIsLiked(!isAlreadyLiked);
+  };
 
   useEffect(() => {
-    const posts = LocalStorageManager.getLikedPosts();
-    setLikedPosts(posts);
-  }, []);
+    updateLikeState();
+  }, [postId]);
 
-  const addLikedPost = (postId: number) => {
-    if (!likedPosts.includes(postId)) {
-      LocalStorageManager.addLikedPost(postId);
-      setLikedPosts((prev) => [...prev, postId]);
-    }
-  };
-
-  const removeLikedPost = (postId: number) => {
-    if (likedPosts.includes(postId)) {
-      LocalStorageManager.removeLikedPost(postId);
-      setLikedPosts((prev) => prev.filter((id) => id !== postId));
-    }
-  };
-
-  const isPostLiked = (postId: number): boolean => {
-    return likedPosts.includes(postId);
-  };
-
-  return { likedPosts, addLikedPost, removeLikedPost, isPostLiked };
+  return { isLiked, toggle };
 }
 
 export default useLike;

@@ -14,13 +14,11 @@ import { DiscoveryCardProps } from "../_interfaces";
 
 function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
   const isAuthenticated = true;
-  const { likedPosts, addLikedPost } = useLike();
+  const { isLiked, toggle } = useLike(id);
 
   const handleLikeClick = () => {
     if (!isAuthenticated) return;
-
-    addLikedPost(id);
-    console.log(likedPosts);
+    toggle();
   };
 
   return (
@@ -31,6 +29,9 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
           className={cn(
             "h-6 w-6",
             isAuthenticated ? "block cursor-pointer" : "text-gray-300",
+            isAuthenticated && isLiked
+              ? "fill-red-500 text-red-500"
+              : "text-gray-300",
           )}
           onClick={handleLikeClick}
         />
