@@ -8,21 +8,29 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-function HomeUserAvatar() {
+interface HomeUserAvatarProps {
+  userName: string;
+  menuItems: Array<{
+    label: string;
+  }>;
+}
+
+function HomeUserAvatar({ userName, menuItems }: HomeUserAvatarProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
-          <AvatarFallback className="bg-black text-white">SG</AvatarFallback>
+        <Avatar className="h-12 w-12">
+          <AvatarFallback className="bg-black text-white">
+            {userName}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+        {menuItems.map((item, index) => (
+          <DropdownMenuItem key={index}>{item.label}</DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

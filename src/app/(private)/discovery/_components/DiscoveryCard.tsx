@@ -1,4 +1,3 @@
-import { ExploreCardProps } from "@/app/interfaces";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,13 +7,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { DiscoveryCardProps } from "../_interfaces";
 
-function ExploreCard({
-  title,
-  content,
-  buttonText,
-  buttonLink,
-}: ExploreCardProps) {
+function DiscoveryCard({ title, content, buttonLink }: DiscoveryCardProps) {
   return (
     <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
       <CardHeader>
@@ -25,11 +20,11 @@ function ExploreCard({
       </CardContent>
       <CardFooter className="flex justify-end">
         <Button variant="outline" asChild>
-          <Link href={buttonLink}>{buttonText}</Link>
+          <Link href={buttonLink}>Learn more</Link>
         </Button>
       </CardFooter>
     </Card>
   );
 }
 
-export default ExploreCard;
+export default DiscoveryCard;

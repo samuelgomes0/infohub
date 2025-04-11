@@ -1,0 +1,17 @@
+"use client";
+
+import Discovery from "./_components";
+import { DiscoveryProvider } from "./_context";
+
+function DiscoveryPage() {
+  return (
+    <DiscoveryProvider>
+      <main className="mx-auto w-full py-12 md:w-3/4 lg:w-1/2">
+        <Discovery.Header />
+        <Discovery.Content />
+      </main>
+    </DiscoveryProvider>
+  );
+}
+
+export default DiscoveryPage;

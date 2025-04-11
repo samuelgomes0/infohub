@@ -16,12 +16,16 @@ interface MenuItemsProps {
 
 const menuItems: MenuItemsProps[] = [
   {
+    href: "/",
+    title: "Home",
+  },
+  {
     href: "/about",
     title: "About",
   },
   {
-    href: "/curiosities",
-    title: "Curiosities",
+    href: "/discovery",
+    title: "Discovery",
   },
 ];
 
@@ -38,7 +42,7 @@ function NavigationBar() {
             <NavigationMenuItem key={index}>
               <Link href={item.href} legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`hover:underline ${isPathActive(item.href) ? "text-black" : "text-gray-500"}`}
+                  className={`hover:underline ${isPathActive(item.href) ? "bg-gray-100 text-black" : "text-gray-500"}`}
                 >
                   {item.title}
                 </NavigationMenuLink>

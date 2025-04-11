@@ -3,7 +3,7 @@ import { CompassIcon } from "lucide-react";
 import Home from "./_components";
 
 function HomePage() {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <main className="mx-auto flex max-w-sm flex-1 flex-col items-center justify-center gap-8 text-center">
@@ -27,7 +27,7 @@ function HomePage() {
       <Home.Button
         icon={CompassIcon}
         content="Discover something new!"
-        url="/explore"
+        url="/discovery"
       />
     </main>
   );
