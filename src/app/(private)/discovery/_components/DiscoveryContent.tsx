@@ -83,10 +83,10 @@ function DiscoveryContent() {
           />
         ))
       ) : (
-        <div className="col-span-2 py-8 text-center">
-          <h2 className="text-xl font-semibold">No results found</h2>
-          <p className="text-gray-500">Try a different search term.</p>
-        </div>
+        <Discovery.NoResultsMessage
+          title="No results found"
+          description="Try a different search term."
+        />
       )}
     </section>
   );

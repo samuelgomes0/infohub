@@ -40,7 +40,7 @@ function LoginForm() {
               </div>
               <Button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600"
+                className="w-full bg-blue-500 text-white hover:bg-blue-600"
               >
                 Login
               </Button>

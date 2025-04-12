@@ -17,7 +17,7 @@ function SearchBar({
       <SearchIcon className="absolute top-3.5 left-4 text-gray-400" size={20} />
       <Input
         placeholder={placeholderContent}
-        className="h-12 rounded-full border-gray-200 bg-white pl-12"
+        className="border-border text-primary h-12 rounded-full bg-white pl-12"
         onChange={(event) => onChange?.(event.target.value)}
       />
     </div>

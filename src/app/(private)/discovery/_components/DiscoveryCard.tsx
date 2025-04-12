@@ -24,7 +24,7 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
   return (
     <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
       <CardHeader className="flex items-center justify-between">
-        <CardTitle className="text-2xl">{title}</CardTitle>
+        <CardTitle className="text-primary text-2xl">{title}</CardTitle>
         <HeartIcon
           className={cn(
             "h-6 w-6",
@@ -36,7 +36,7 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
           onClick={handleLikeClick}
         />
       </CardHeader>
-      <CardContent className="flex-grow text-gray-500">
+      <CardContent className="text-muted-foreground flex-grow">
         <p>{content}</p>
       </CardContent>
       <CardFooter className="flex justify-end">

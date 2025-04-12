@@ -3,7 +3,7 @@ interface HomeDescriptionProps {
 }
 
 function HomeDescription({ content }: HomeDescriptionProps) {
-  return <p className="text-lg text-gray-500">{content}</p>;
+  return <p className="text-muted-foreground text-lg">{content}</p>;
 }
 
 export default HomeDescription;

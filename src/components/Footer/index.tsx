@@ -3,7 +3,7 @@ import Link from "next/link";
 function Footer() {
   return (
     <footer className="mt-auto w-full p-4 text-center text-sm">
-      <p className="text-gray-500">
+      <p className="text-muted-foreground">
         Desenvolvido por{" "}
         <Link
           className="font-medium hover:underline"

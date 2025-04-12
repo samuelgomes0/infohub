@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gray-100">
+    <div className="bg-background flex min-h-screen flex-col items-center">
       {children}
       <Footer />
     </div>

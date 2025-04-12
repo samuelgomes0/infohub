@@ -3,7 +3,7 @@ import NavigationBar from "@/components/NavigationBar";
 
 function PrivateLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gray-100">
+    <div className="bg-background flex min-h-screen flex-col items-center">
       <NavigationBar />
       {children}
       <Footer />
