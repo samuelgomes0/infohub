@@ -1,6 +1,6 @@
 import SearchBar from "@/components/SearchBar";
-import { useDiscoveryContext } from "../_context";
 import Discovery from ".";
+import { useDiscoveryContext } from "../context";
 
 function DiscoveryHeader() {
   const { setSearchQuery } = useDiscoveryContext();

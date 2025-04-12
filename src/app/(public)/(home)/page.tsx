@@ -1,12 +1,24 @@
+"use client";
+
 import DefaultButton from "@/components/DefaultButton";
 import SearchBar from "@/components/SearchBar";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import UserAvatar from "@/components/UserAvatar";
 import { CompassIcon } from "lucide-react";
-import Home from "./_components";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Home from "./components";
 
 function HomePage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
   const isAuthenticated = false;
+
+  const handleSearch = () => {
+    if (!searchQuery.trim()) return;
+    const encoded = encodeURIComponent(searchQuery.trim());
+    router.push(`/discovery/${encoded}`);
+  };
 
   return (
     <main className="mx-auto flex max-w-sm flex-1 flex-col items-center justify-center gap-8 text-center">
@@ -22,12 +34,21 @@ function HomePage() {
           />
         )}
       </div>
+
       <section className="flex flex-col gap-2">
         <Home.Title content="InfoHub" />
         <Home.Description content="Explore curious facts from around the world" />
       </section>
-      <SearchBar placeholder="Search for knowledge..." />
+
+      <SearchBar
+        placeholder="Search for knowledge..."
+        value={searchQuery}
+        onChange={setSearchQuery}
+        onSubmit={handleSearch}
+      />
+
       <span className="text-muted-foreground">or</span>
+
       <DefaultButton
         icon={CompassIcon}
         content="Discover something new!"

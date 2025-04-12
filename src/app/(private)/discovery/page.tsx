@@ -1,7 +1,7 @@
 "use client";
 
-import Discovery from "./_components";
-import { DiscoveryProvider } from "./_context";
+import Discovery from "./components";
+import { DiscoveryProvider } from "./context";
 
 function DiscoveryPage() {
   return (

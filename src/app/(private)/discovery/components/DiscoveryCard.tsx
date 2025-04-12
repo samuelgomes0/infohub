@@ -7,10 +7,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useLike from "@/hooks/useLike";
-import { cn } from "@/lib/utils";
-import { HeartIcon } from "lucide-react";
 import Link from "next/link";
-import { DiscoveryCardProps } from "../_interfaces";
+import Discovery from ".";
+import { DiscoveryCardProps } from "../interfaces";
 
 function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
   const isAuthenticated = true;
@@ -25,15 +24,10 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
     <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
       <CardHeader className="flex items-center justify-between">
         <CardTitle className="text-primary text-2xl">{title}</CardTitle>
-        <HeartIcon
-          className={cn(
-            "h-6 w-6",
-            isAuthenticated ? "block cursor-pointer" : "text-gray-300",
-            isAuthenticated && isLiked
-              ? "fill-red-500 text-red-500"
-              : "text-gray-300",
-          )}
-          onClick={handleLikeClick}
+        <Discovery.FavoriteButton
+          isAuthenticated={isAuthenticated}
+          isLiked={isLiked}
+          onLikeToggle={handleLikeClick}
         />
       </CardHeader>
       <CardContent className="text-muted-foreground flex-grow">

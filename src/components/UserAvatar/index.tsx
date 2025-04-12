@@ -23,7 +23,7 @@ function UserAvatar({ userName }: UserAvatarProps) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="h-12 w-12">
-          <AvatarFallback className="bg-black text-white">
+          <AvatarFallback className="bg-primary text-secondary">
             {userName}
           </AvatarFallback>
         </Avatar>

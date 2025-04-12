@@ -1,4 +1,4 @@
-import { DiscoveryCardProps } from "../_interfaces";
+import { DiscoveryCardProps } from "../interfaces";
 
 function filterCards(
   cards: DiscoveryCardProps[],
