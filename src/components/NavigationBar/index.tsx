@@ -38,7 +38,7 @@ function NavigationBar() {
   const isAuthenticated = false;
 
   return (
-    <div className="bg-primary-foreground flex w-full items-center justify-between border-b p-4">
+    <div className="dark:bg-primary-foreground flex w-full items-center justify-between border-b bg-white p-4">
       <div></div>
       <NavigationMenu>
         <NavigationMenuList className="flex justify-center gap-8 font-medium">

@@ -26,7 +26,7 @@ function SearchBar({
         onKeyDown={(e) => {
           if (e.key === "Enter") onSubmit?.();
         }}
-        className="border-border text-primary h-12 rounded-full bg-white pl-12"
+        className="border-border text-primary bg-card dark:bg-card h-12 rounded-full pl-12"
       />
     </div>
   );
