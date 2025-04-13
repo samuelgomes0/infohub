@@ -36,8 +36,8 @@ function HomePage() {
       </div>
 
       <section className="flex flex-col gap-2">
-        <Home.Title content="InfoHub" />
-        <Home.Description content="Explore curious facts from around the world" />
+        <Home.Title content="WiseHub" />
+        <Home.Description content="Explore curious facts from around the world." />
       </section>
 
       <SearchBar

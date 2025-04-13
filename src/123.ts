@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
   const publicRoute = publicRoutes.find((route) => route.path === path);
-  const authToken = request.cookies.get("infohub.token");
+  const authToken = request.cookies.get("wisehub.token");
 
   if (!authToken && publicRoute) {
     return NextResponse.next();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "infohub.likedPosts";
+const STORAGE_KEY = "wisehub.likedPosts";
 
 function useLike(postId: number) {
   const [isLiked, setIsLiked] = useState(false);

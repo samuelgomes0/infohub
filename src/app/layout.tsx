@@ -14,7 +14,7 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "InfoHub",
+  title: "WiseHub",
   description: "A platform for sharing and discovering information.",
 };
 
