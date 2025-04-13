@@ -7,14 +7,13 @@ function DiscoveryHeader() {
 
   return (
     <header>
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between gap-8 max-md:flex-col">
         <Discovery.Title content="Discovery" />
         <SearchBar
           placeholder="Search for anything..."
           onChange={setSearchQuery}
         />
       </div>
-      <Discovery.FilterBar />
     </header>
   );
 }

@@ -87,7 +87,7 @@ function DiscoveryContent() {
   console.log(data);
 
   return (
-    <section className="grid grid-cols-2 gap-6 py-8">
+    <section className="grid grid-cols-2 gap-6 py-8 max-sm:grid-cols-1">
       {filteredCards.length > 0 ? (
         filteredCards.map(({ id, title, content, buttonLink }) => (
           <Discovery.Card
