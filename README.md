@@ -57,7 +57,6 @@ WiseHub é uma aplicação web moderna construída com **Next.js**, que permite 
 ## 🧩 Middleware
 
 Middleware configurado em `/middleware.ts` para:
-
 - Bloquear acesso a rotas protegidas (ex: `/favorites`) caso não autenticado
 - Redirecionar usuários autenticados longe de `/login`
 
@@ -65,27 +64,25 @@ Middleware configurado em `/middleware.ts` para:
 
 ## 📄 Páginas implementadas
 
-| Rota                | Descrição                                              |
-| ------------------- | ------------------------------------------------------ |
-| `/`                 | Página inicial estática com CTA e busca                |
-| `/discovery`        | Página que consome a API externa (Wikipedia)           |
-| `/discovery/[slug]` | Rota dinâmica que exibe conteúdo específico            |
-| `/favorites`        | Listagem de artigos favoritos (com proteção de acesso) |
-| `/login`            | Formulário de autenticação simples                     |
+| Rota                | Descrição                                                  |
+|---------------------|------------------------------------------------------------|
+| `/`                 | Página inicial estática com CTA e busca                    |
+| `/discovery`        | Página que consome a API externa (Wikipedia)               |
+| `/discovery/[slug]` | Rota dinâmica que exibe conteúdo específico                |
+| `/favorites`        | Listagem de artigos favoritos (com proteção de acesso)     |
+| `/login`            | Formulário de autenticação simples                         |
 
 ---
 
 ## 📦 Como rodar o projeto
 
 1. **Clone o repositório**
-
 ```bash
 git clone https://github.com/seu-usuario/wisehub.git
 cd wisehub
 ```
 
 2. **Instale as dependências**
-
 ```bash
 npm install
 # ou
@@ -93,16 +90,23 @@ yarn install
 ```
 
 3. **Inicie o servidor de desenvolvimento**
-
 ```bash
 npm run dev
 ```
 
 4. **Acesse em**
-
 ```
 http://localhost:3000
 ```
+
+---
+
+## 👤 Credenciais de Demonstração
+
+Para testar o sistema de login, utilize as credenciais abaixo:
+
+- **Email:** `admin@email.com`
+- **Senha:** `admin.123!`
 
 ---
 
