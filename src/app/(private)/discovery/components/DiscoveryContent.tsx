@@ -5,11 +5,25 @@ import Discovery from ".";
 import { useDiscoveryContext } from "../context";
 import { DiscoveryCardProps } from "../interfaces";
 
+interface WikipediaPage {
+  pageid: number;
+  title: string;
+  extract: string;
+}
+
+interface WikipediaResponse {
+  query: {
+    pages: {
+      [key: string]: WikipediaPage;
+    };
+  };
+}
+
 function DiscoveryContent() {
   const { searchQuery } = useDiscoveryContext();
 
   const { data, loading } = useRequest(
-    alovaInstance.Get("", {
+    alovaInstance.Get<WikipediaResponse>("", {
       params: {
         action: "query",
         format: "json",
@@ -26,7 +40,7 @@ function DiscoveryContent() {
   );
 
   const rawCards: DiscoveryCardProps[] = data?.query?.pages
-    ? Object.values(data.query.pages).map((page: any) => ({
+    ? Object.values(data.query.pages).map((page) => ({
         id: page.pageid,
         title: page.title,
         content: page.extract,
