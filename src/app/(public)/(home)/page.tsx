@@ -26,7 +26,7 @@ function HomePage() {
       <div className="absolute top-4 right-4 flex items-center gap-4">
         <ThemeSwitcher />
         {isAuthenticated ? (
-          <UserAvatar userName="SG" />
+          <UserAvatar userName="WH" />
         ) : (
           <DefaultButton
             content="Login"

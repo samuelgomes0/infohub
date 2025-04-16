@@ -16,7 +16,7 @@ function handleLogin(
   };
 
   if (!validateCredentials(loginData)) {
-    toast.error("Invalid email or password.");
+    toast.error("Email or password is incorrect! Please try again.");
     return;
   }
 
