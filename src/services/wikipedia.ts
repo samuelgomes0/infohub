@@ -1,8 +1,22 @@
-import { WikiArticle } from "@/interfaces";
 import alovaInstance from "./alovaInstance";
 
+// interfaces.ts
+export interface WikiArticle {
+  pageid: number;
+  title: string;
+  extract: string;
+}
+
+export interface WikipediaAPIResponse {
+  data: {
+    query: {
+      pages: Record<string, WikiArticle>;
+    };
+  };
+}
+
 export function searchWikipedia(term: string) {
-  return alovaInstance.Get<{ query: { pages: Record<string, any> } }>("", {
+  return alovaInstance.Get<WikipediaAPIResponse>("", {
     params: {
       action: "query",
       format: "json",
@@ -18,10 +32,10 @@ export function searchWikipedia(term: string) {
 }
 
 export async function fetchWikiArticles(term: string): Promise<WikiArticle[]> {
-  const res = await searchWikipedia(term).send();
-  const pages = res.data.query?.pages || {};
+  const { data } = await searchWikipedia(term).send();
+  const pages = data.query?.pages || {};
 
-  return Object.values(pages).map((page: any) => ({
+  return Object.values(pages).map((page) => ({
     pageid: page.pageid,
     title: page.title,
     extract: page.extract,
