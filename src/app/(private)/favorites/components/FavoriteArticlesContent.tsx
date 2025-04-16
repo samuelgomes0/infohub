@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDiscoveryContext } from "../../discovery/context";
 import { getArticlesMetadata } from "../utils/getArticlesMetadata";
 import FavoritedArticleCard from "./FavoriteArticlesCard";
-import FavoritedArticlesCardNoFavoritsYetMessage from "./FavoriteArticlesNoFavoritsYetMessage";
+import FavoritedArticlesCardNoFavoritesYetMessage from "./FavoriteArticlesNoFavoritsYetMessage";
 
 interface FavoritedArticle {
   id: string;
@@ -23,35 +23,47 @@ function FavoriteArticlesContent() {
     const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
     const parsedIds: string[] = stored ? JSON.parse(stored) : [];
 
-    async function fetchFavoritedArticles() {
-      const articles = await getArticlesMetadata(parsedIds);
-      setFavoritedArticles(articles);
-    }
+    if (parsedIds.length === 0) return;
 
-    if (parsedIds.length > 0) {
-      fetchFavoritedArticles();
-    }
+    const fetchFavoritedArticles = async () => {
+      try {
+        const articles = await getArticlesMetadata(parsedIds);
+        setFavoritedArticles(articles);
+      } catch (error) {
+        console.error("Failed to load favorited articles:", error);
+      }
+    };
+
+    fetchFavoritedArticles();
   }, []);
 
-  const filteredCards = favoritedArticles.filter(
-    ({ title, content }) =>
-      title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      content.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  const filteredArticles = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return favoritedArticles;
+
+    return favoritedArticles.filter(
+      ({ title, content }) =>
+        title.toLowerCase().includes(query) ||
+        content.toLowerCase().includes(query),
+    );
+  }, [favoritedArticles, searchQuery]);
+
+  const hasFavorites = favoritedArticles.length > 0;
+  const hasFilteredResults = filteredArticles.length > 0;
 
   return (
-    <section className="grid grid-cols-2 gap-6 py-8 max-sm:grid-cols-1">
-      {favoritedArticles.length === 0 ? (
-        <FavoritedArticlesCardNoFavoritsYetMessage
+    <section className="grid grid-cols-1 gap-6 py-8 sm:grid-cols-2">
+      {!hasFavorites ? (
+        <FavoritedArticlesCardNoFavoritesYetMessage
           title="No favorites yet!"
           description="You haven't favorited any articles yet."
         />
-      ) : filteredCards.length > 0 ? (
-        filteredCards.map(({ id }) => (
-          <FavoritedArticleCard key={id} articleId={id} />
+      ) : hasFilteredResults ? (
+        filteredArticles.map(({ id }) => (
+          <FavoritedArticleCard key={id} articleId={parseInt(id)} />
         ))
       ) : (
-        <FavoritedArticlesCardNoFavoritsYetMessage
+        <FavoritedArticlesCardNoFavoritesYetMessage
           title="No results found"
           description="Try a different search term."
         />

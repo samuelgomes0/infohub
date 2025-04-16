@@ -6,12 +6,13 @@ function DiscoveryHeader() {
   const { setSearchQuery } = useDiscoveryContext();
 
   return (
-    <header>
-      <div className="mb-4 flex items-center justify-between gap-8 max-md:flex-col">
+    <header className="w-full">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-4 sm:gap-8">
         <Discovery.Title content="Discovery" />
         <SearchBar
           placeholder="Search for anything..."
           onChange={setSearchQuery}
+          aria-label="Search articles"
         />
       </div>
     </header>

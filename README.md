@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 WiseHub — Explorador de Curiosidades
 
-## Getting Started
+WiseHub é uma aplicação web moderna construída com **Next.js**, que permite aos usuários explorar curiosidades do mundo inteiro usando a **API da Wikipédia**. É possível pesquisar artigos, marcar favoritos e navegar por conteúdos de forma rápida e intuitiva.
 
-First, run the development server:
+🔗 Acesse em: [https://wisehub.vercel.app/](https://wisehub.vercel.app/)
+
+---
+
+## 🚀 Funcionalidades
+
+- 🔍 Pesquisa de artigos curiosos via API da Wikipédia.
+- ❤️ Favoritar artigos e armazenar localmente.
+- 🔐 Sistema de login simples com proteção de rotas.
+- 🌗 Alternância entre temas claro e escuro.
+- ⚡ Performance otimizada com cache e carregamento sob demanda.
+- 🧩 Middleware para controle de acesso.
+- 🧱 Estrutura modular e bem organizada.
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+/app
+  /discovery         → Página com resultados da Wikipédia
+    [slug]/          → Página dinâmica para artigos individuais
+  /favorites         → Lista de favoritos (rota protegida)
+  /login             → Tela de login
+/components          → Componentes reutilizáveis
+/contexts            → Contextos de autenticação e busca
+/hooks               → Hooks personalizados (ex: useLike)
+```
+
+---
+
+## 🛠️ Tecnologias
+
+- **Next.js 14**
+- **TypeScript**
+- **Tailwind CSS**
+- **Alova (cliente HTTP)**
+- **Sonner (notificações)**
+- **Lucide React (ícones)**
+- **API da Wikipédia**
+
+---
+
+## 🔐 Autenticação
+
+- Formulário de login com validação local
+- Sessão armazenada em cookie (`wisehub.token`)
+- Rota protegida com contexto e middleware
+- Sem banco de dados (usuários definidos no código)
+
+---
+
+## 🧩 Middleware
+
+Middleware configurado em `/middleware.ts` para:
+
+- Bloquear acesso a rotas protegidas (ex: `/favorites`) caso não autenticado
+- Redirecionar usuários autenticados longe de `/login`
+
+---
+
+## 📄 Páginas implementadas
+
+| Rota                | Descrição                                              |
+| ------------------- | ------------------------------------------------------ |
+| `/`                 | Página inicial estática com CTA e busca                |
+| `/discovery`        | Página que consome a API externa (Wikipedia)           |
+| `/discovery/[slug]` | Rota dinâmica que exibe conteúdo específico            |
+| `/favorites`        | Listagem de artigos favoritos (com proteção de acesso) |
+| `/login`            | Formulário de autenticação simples                     |
+
+---
+
+## 📦 Como rodar o projeto
+
+1. **Clone o repositório**
+
+```bash
+git clone https://github.com/seu-usuario/wisehub.git
+cd wisehub
+```
+
+2. **Instale as dependências**
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+3. **Inicie o servidor de desenvolvimento**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Acesse em**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✅ Checklist de Requisitos (Teste Prático)
 
-To learn more about Next.js, take a look at the following resources:
+- [x] Mínimo de 3 rotas com página
+- [x] Página que consome API externa (Wikipedia)
+- [x] Página estática (home)
+- [x] Página dinâmica com parâmetro (`/discovery/[slug]`)
+- [x] Middleware implementado
+- [x] Sistema de autenticação funcional
+- [x] Otimizações de performance
+- [x] Projeto público no GitHub com README
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 Licença
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Projeto desenvolvido para fins de avaliação técnica — 2025 © Todos os direitos reservados.

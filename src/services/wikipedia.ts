@@ -1,6 +1,5 @@
 import alovaInstance from "./alovaInstance";
 
-// interfaces.ts
 export interface WikiArticle {
   pageid: number;
   title: string;

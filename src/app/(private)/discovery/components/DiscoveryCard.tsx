@@ -17,28 +17,37 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
   const { isLiked, toggle } = useLike(id);
 
   const handleLikeClick = () => {
-    if (!isAuthenticated) return;
-    toggle();
+    if (isAuthenticated) {
+      toggle();
+    }
   };
 
+  const truncatedContent =
+    content.length > 120 ? `${content.slice(0, 117)}...` : content;
+
   return (
-    <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
+    <Card className="flex flex-col gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
       <CardHeader className="flex items-center justify-between">
         <CardTitle className="text-primary truncate text-2xl" title={title}>
           {title}
         </CardTitle>
+
         <Discovery.FavoriteButton
           isAuthenticated={isAuthenticated}
           isLiked={isLiked}
           onLikeToggle={handleLikeClick}
         />
       </CardHeader>
+
       <CardContent className="text-muted-foreground flex-grow">
-        <p>{content.length > 120 ? `${content.slice(0, 117)}...` : content}</p>
+        <p>{truncatedContent}</p>
       </CardContent>
+
       <CardFooter className="flex justify-end">
         <Button variant="outline" asChild>
-          <Link href={buttonLink}>Learn more</Link>
+          <Link href={buttonLink} aria-label={`Learn more about ${title}`}>
+            Learn more
+          </Link>
         </Button>
       </CardFooter>
     </Card>

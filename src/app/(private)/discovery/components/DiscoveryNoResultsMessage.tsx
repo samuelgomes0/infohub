@@ -8,9 +8,15 @@ function DiscoveryNoResultsMessage({
   description,
 }: DiscoveryNoResultsMessageProps) {
   return (
-    <div className="col-span-2 py-8 text-center">
-      <h2 className="text-primary text-xl font-semibold">{title}</h2>
-      <p className="text-muted-foreground">{description}</p>
+    <div
+      className="col-span-full py-12 text-center"
+      role="status"
+      aria-live="polite"
+    >
+      <h2 className="text-primary text-2xl font-semibold">{title}</h2>
+      {description && (
+        <p className="text-muted-foreground mt-2 text-base">{description}</p>
+      )}
     </div>
   );
 }

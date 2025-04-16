@@ -16,9 +16,9 @@ function HomePage() {
   const { isAuthenticated } = useAuth();
 
   const handleSearch = () => {
-    if (!searchQuery.trim()) return;
-    const encoded = encodeURIComponent(searchQuery.trim());
-    router.push(`/discovery/${encoded}`);
+    const trimmed = searchQuery.trim();
+    if (!trimmed) return;
+    router.push(`/discovery/${encodeURIComponent(trimmed)}`);
   };
 
   return (
@@ -31,7 +31,7 @@ function HomePage() {
           <DefaultButton
             content="Login"
             url="/login"
-            className="hover:bg-primary/90 bg-primary text-secondary h-10"
+            className="bg-primary text-secondary hover:bg-primary/90 h-10"
           />
         )}
       </div>
@@ -46,14 +46,16 @@ function HomePage() {
         value={searchQuery}
         onChange={setSearchQuery}
         onSubmit={handleSearch}
+        aria-label="Search for articles by topic"
       />
 
-      <span className="text-muted-foreground">or</span>
+      <span className="text-muted-foreground text-sm">or</span>
 
       <DefaultButton
         icon={CompassIcon}
         content="Discover something new!"
         url="/discovery"
+        className="w-full sm:w-auto"
       />
     </main>
   );

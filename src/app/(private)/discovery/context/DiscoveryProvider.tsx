@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  type ReactNode,
+} from "react";
 
 interface DiscoveryContextType {
   searchQuery: string;
@@ -11,8 +17,12 @@ const DiscoveryContext = createContext<DiscoveryContextType | undefined>(
   undefined,
 );
 
-function DiscoveryProvider({ children }: { children: React.ReactNode }) {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+function DiscoveryProvider({ children }: { children: ReactNode }) {
+  const [searchQuery, setSearchQueryState] = useState<string>("");
+
+  const setSearchQuery = useCallback((value: string) => {
+    setSearchQueryState(value);
+  }, []);
 
   return (
     <DiscoveryContext.Provider value={{ searchQuery, setSearchQuery }}>
@@ -21,11 +31,11 @@ function DiscoveryProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-function useDiscoveryContext() {
+function useDiscoveryContext(): DiscoveryContextType {
   const context = useContext(DiscoveryContext);
   if (!context) {
     throw new Error(
-      "useDiscoveryContext must be used within an DiscoveryProvider",
+      "useDiscoveryContext must be used within a DiscoveryProvider",
     );
   }
   return context;

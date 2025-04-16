@@ -22,37 +22,44 @@ function LoginForm() {
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email and password to access your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={(event) => handleLogin(event, login)}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <label htmlFor="email" className="text-sm font-medium">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="email@example.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
-                <Input id="password" name="password" type="password" required />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-blue-500 text-white hover:bg-blue-600"
-              >
-                Login
-              </Button>
+          <form
+            onSubmit={(event) => handleLogin(event, login)}
+            className="space-y-6"
+          >
+            <div className="grid gap-2">
+              <Label htmlFor="email" className="text-sm font-medium">
+                Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="email@example.com"
+                autoComplete="email"
+                required
+              />
             </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="password" className="text-sm font-medium">
+                Password
+              </Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+              />
+            </div>
+
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
           </form>
         </CardContent>
       </Card>

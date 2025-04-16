@@ -13,21 +13,24 @@ function DiscoveryDetailPage() {
   const { pageData, loading, error } = useWikipediaPage(slug);
   const { isAuthenticated } = useAuth();
 
-  const { title, extract, pageid } = pageData || {};
+  const { title = "", extract = "", pageid } = pageData || {};
   const { isLiked, toggle } = useLike(pageid);
   const sections = extract ? parseWikipediaExtract(extract) : [];
 
   const handleLikeClick = () => {
-    if (!isAuthenticated) return;
-    toggle();
+    if (isAuthenticated) {
+      toggle();
+    }
   };
 
   return (
-    <main className="bg-card mx-auto my-8 w-full rounded border p-12 py-12 md:w-3/4 lg:w-1/2">
+    <main className="bg-card mx-auto my-8 w-full rounded border p-12 md:w-3/4 lg:w-1/2">
       <DiscoveryDetail.BackButton />
 
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-primary text-4xl font-bold">{title}</h1>
+      <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="text-primary text-4xl font-bold" aria-live="polite">
+          {loading ? "Loading..." : title}
+        </h1>
         {!loading && pageid && (
           <Discovery.FavoriteButton
             isAuthenticated={isAuthenticated}
@@ -35,16 +38,18 @@ function DiscoveryDetailPage() {
             onLikeToggle={handleLikeClick}
           />
         )}
-      </div>
+      </header>
 
       {loading && <DiscoveryDetail.Skeleton />}
 
       {!loading && sections.length === 0 && (
-        <p className="text-muted-foreground leading-relaxed"></p>
+        <p className="text-muted-foreground leading-relaxed">
+          This article has no readable content available.
+        </p>
       )}
 
       {sections.map((section, idx) => (
-        <section key={idx}>
+        <section key={idx} className="mb-8">
           {section.title && (
             <DiscoveryDetail.ArticleTitle text={section.title} />
           )}
@@ -55,9 +60,13 @@ function DiscoveryDetailPage() {
       ))}
 
       {error && (
-        <p className="text-destructive mt-4 text-sm">
-          Ocorreu um erro ao buscar a página da Wikipédia: {error.message}
-        </p>
+        <div
+          role="alert"
+          className="text-destructive bg-destructive/10 mt-4 rounded p-3 text-sm"
+        >
+          An error occurred while fetching the Wikipedia page:{" "}
+          <span className="font-medium">{error.message}</span>
+        </div>
       )}
     </main>
   );

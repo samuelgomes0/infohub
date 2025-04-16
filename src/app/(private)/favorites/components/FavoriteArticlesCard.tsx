@@ -24,11 +24,10 @@ function FavoritedArticleCard({ articleId }: FavoritedArticleCardProps) {
   const { isAuthenticated } = useAuth();
 
   const handleLikeClick = () => {
-    if (!isAuthenticated) return;
-    toggle();
+    if (isAuthenticated) toggle();
   };
 
-  const { loading, data } = useRequest(() =>
+  const { loading, data, error } = useRequest(() =>
     alovaInstance.Get("", {
       params: {
         action: "query",
@@ -41,11 +40,13 @@ function FavoritedArticleCard({ articleId }: FavoritedArticleCardProps) {
     }),
   );
 
-  const { title, extract: content } = data?.query?.pages[articleId] || {};
+  const page = data?.query?.pages?.[articleId];
+  const title = page?.title || "Untitled";
+  const content: string = page?.extract || "";
   const buttonLink = `/discovery/${articleId}`;
 
   return (
-    <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
+    <Card className="flex flex-col gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
       <CardHeader className="flex items-center justify-between">
         <CardTitle className="text-primary truncate text-2xl" title={title}>
           {title}
@@ -56,17 +57,28 @@ function FavoritedArticleCard({ articleId }: FavoritedArticleCardProps) {
           onLikeToggle={handleLikeClick}
         />
       </CardHeader>
+
       <CardContent className="text-muted-foreground flex-grow">
-        {loading && "Loading..."}
-        {content && (
+        {loading && <p className="text-sm italic">Loading content...</p>}
+
+        {error && (
+          <p className="text-destructive text-sm">
+            Failed to load article content.
+          </p>
+        )}
+
+        {!loading && !error && (
           <p>
             {content.length > 120 ? `${content.slice(0, 117)}...` : content}
           </p>
         )}
       </CardContent>
+
       <CardFooter className="flex justify-end">
         <Button variant="outline" asChild>
-          <Link href={buttonLink}>Learn more</Link>
+          <Link href={buttonLink} aria-label={`View details for ${title}`}>
+            Learn more
+          </Link>
         </Button>
       </CardFooter>
     </Card>

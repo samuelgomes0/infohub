@@ -1,4 +1,3 @@
-// utils/articleMetadataFetcher.ts
 export async function getArticlesMetadata(ids: string[]) {
   const promises = ids.map(async (id) => {
     const res = await fetch(

@@ -10,9 +10,15 @@ interface SearchResponse {
 interface ExtractResponse {
   query?: {
     pages?: {
-      [key: string]: unknown;
+      [key: string]: WikipediaPage;
     };
   };
+}
+
+interface WikipediaPage {
+  pageid: number;
+  title: string;
+  extract: string;
 }
 
 async function fetchSearchPageId(slug: string): Promise<string> {
@@ -29,11 +35,11 @@ async function fetchSearchPageId(slug: string): Promise<string> {
     .send();
 
   const pageId = response?.query?.search?.[0]?.pageid;
-  if (!pageId) throw new Error("Nenhum resultado encontrado.");
+  if (!pageId) throw new Error("No matching page found.");
   return String(pageId);
 }
 
-async function fetchPageExtract(pageId: string): Promise<unknown> {
+async function fetchPageExtract(pageId: string): Promise<WikipediaPage> {
   const response = await alovaInstance
     .Get<ExtractResponse>("", {
       params: {
@@ -48,12 +54,12 @@ async function fetchPageExtract(pageId: string): Promise<unknown> {
     .send();
 
   const page = response?.query?.pages?.[pageId];
-  if (!page) throw new Error("Página não encontrada.");
-  return page;
+  if (!page || typeof page !== "object") throw new Error("Page not found.");
+  return page as WikipediaPage;
 }
 
 export function useWikipediaPage(slug: string) {
-  const [pageData, setPageData] = useState<unknown>(null);
+  const [pageData, setPageData] = useState<WikipediaPage | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -73,7 +79,7 @@ export function useWikipediaPage(slug: string) {
       } catch (err) {
         if (!isCancelled) {
           setError(
-            err instanceof Error ? err : new Error("Erro desconhecido."),
+            err instanceof Error ? err : new Error("Unknown error occurred."),
           );
         }
       } finally {

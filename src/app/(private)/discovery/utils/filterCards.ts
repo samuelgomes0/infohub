@@ -4,11 +4,16 @@ function filterCards(
   cards: DiscoveryCardProps[],
   searchQuery: string,
 ): DiscoveryCardProps[] {
-  return cards.filter(
-    (card) =>
-      card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      card.content.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  if (!searchQuery?.trim()) return cards;
+
+  const lowerQuery = searchQuery.toLowerCase();
+
+  return cards.filter(({ title, content }) => {
+    return (
+      title.toLowerCase().includes(lowerQuery) ||
+      content.toLowerCase().includes(lowerQuery)
+    );
+  });
 }
 
 export default filterCards;
