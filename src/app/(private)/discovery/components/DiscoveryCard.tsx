@@ -23,7 +23,9 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
   return (
     <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
       <CardHeader className="flex items-center justify-between">
-        <CardTitle className="text-primary text-2xl">{title}</CardTitle>
+        <CardTitle className="text-primary truncate text-2xl" title={title}>
+          {title}
+        </CardTitle>
         <Discovery.FavoriteButton
           isAuthenticated={isAuthenticated}
           isLiked={isLiked}
@@ -31,7 +33,7 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
         />
       </CardHeader>
       <CardContent className="text-muted-foreground flex-grow">
-        <p>{content}</p>
+        <p>{content.length > 120 ? `${content.slice(0, 117)}...` : content}</p>
       </CardContent>
       <CardFooter className="flex justify-end">
         <Button variant="outline" asChild>
