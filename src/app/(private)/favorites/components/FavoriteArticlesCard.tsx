@@ -41,8 +41,6 @@ function FavoritedArticleCard({ articleId }: FavoritedArticleCardProps) {
     }),
   );
 
-  console.log(data);
-
   const { title, extract: content } = data?.query?.pages[articleId] || {};
   const buttonLink = `/discovery/${articleId}`;
 

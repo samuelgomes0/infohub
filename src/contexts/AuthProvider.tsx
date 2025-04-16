@@ -1,6 +1,5 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextProps {
@@ -24,13 +23,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = (token: string) => {
     document.cookie = `wisehub.token=${token}; path=/; max-age=86400; Secure; SameSite=Strict`;
     setIsAuthenticated(true);
-    redirect("/discovery");
+    window.location.href = "/discovery";
   };
 
   const logout = () => {
     document.cookie =
       "wisehub.token=; path=/; max-age=0; Secure; SameSite=Strict";
     setIsAuthenticated(false);
+    window.location.href = "/";
   };
 
   return (
