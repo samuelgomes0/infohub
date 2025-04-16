@@ -24,12 +24,12 @@ const navMenuItems: navMenuItems[] = [
     title: "Home",
   },
   {
-    href: "/about",
-    title: "About",
-  },
-  {
     href: "/discovery",
     title: "Discovery",
+  },
+  {
+    href: "/favorites",
+    title: "Favorites",
   },
 ];
 
