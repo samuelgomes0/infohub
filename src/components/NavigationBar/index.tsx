@@ -6,6 +6,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { useAuth } from "@/contexts/AuthProvider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DefaultButton from "../DefaultButton";
@@ -35,7 +36,7 @@ const navMenuItems: navMenuItems[] = [
 function NavigationBar() {
   const pathname = usePathname();
   const isPathActive = (path: string) => path === pathname;
-  const isAuthenticated = false;
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className="dark:bg-primary-foreground flex w-full items-center justify-between border-b bg-white p-4">

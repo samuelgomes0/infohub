@@ -38,8 +38,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  // TODO: Add logic to check if the user has the required permissions to access the route
-
   return NextResponse.next();
 }
 

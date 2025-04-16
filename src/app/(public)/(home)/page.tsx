@@ -4,6 +4,7 @@ import DefaultButton from "@/components/DefaultButton";
 import SearchBar from "@/components/SearchBar";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import UserAvatar from "@/components/UserAvatar";
+import { useAuth } from "@/contexts/AuthProvider";
 import { CompassIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,7 +13,7 @@ import Home from "./components";
 function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
-  const isAuthenticated = false;
+  const { isAuthenticated } = useAuth();
 
   const handleSearch = () => {
     if (!searchQuery.trim()) return;

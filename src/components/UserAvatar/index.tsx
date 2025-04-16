@@ -7,22 +7,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthProvider";
+import { redirect } from "next/navigation";
+import { Separator } from "../ui/separator";
 
 interface UserAvatarProps {
   userName: string;
 }
 
-const userAvatarMenuItems = [
-  { label: "My Profile" },
-  { label: "Settings" },
-  { label: "Logout" },
-];
+const userAvatarMenuItems = [{ label: "My Profile" }, { label: "Settings" }];
 
 function UserAvatar({ userName }: UserAvatarProps) {
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+    redirect("/");
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="h-12 w-12">
+        <Avatar className="h-11 w-11">
           <AvatarFallback className="bg-primary text-secondary">
             {userName}
           </AvatarFallback>
@@ -32,8 +37,14 @@ function UserAvatar({ userName }: UserAvatarProps) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {userAvatarMenuItems.map((item, index) => (
-          <DropdownMenuItem key={index}>{item.label}</DropdownMenuItem>
+          <DropdownMenuItem key={index} disabled>
+            {item.label}
+          </DropdownMenuItem>
         ))}
+        <Separator className="my-2" />
+        <DropdownMenuItem className="text-red-500" onClick={handleLogout}>
+          Logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,9 +10,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { useAuth } from "@/contexts/AuthProvider";
+import { handleLogin } from "../utils";
 
 function LoginForm() {
+  const { login } = useAuth();
+
   return (
     <div className="flex flex-col gap-6">
       <Card>
@@ -21,12 +26,15 @@ function LoginForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={(event) => handleLogin(event, login)}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="email@example.com"
                   required
@@ -36,7 +44,7 @@ function LoginForm() {
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" required />
               </div>
               <Button
                 type="submit"
@@ -44,12 +52,6 @@ function LoginForm() {
               >
                 Login
               </Button>
-            </div>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href="#" className="font-semibold hover:underline">
-                Sign up
-              </Link>
             </div>
           </form>
         </CardContent>
