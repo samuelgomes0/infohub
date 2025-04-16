@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,19 +9,42 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthProvider";
-import useLike from "@/hooks/useLike";
+import { useLike } from "@/hooks";
+import { alovaInstance } from "@/services";
+import { useRequest } from "alova/client";
 import Link from "next/link";
-import Discovery from ".";
-import { DiscoveryCardProps } from "../interfaces";
+import Discovery from "../../discovery/components";
 
-function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
+interface FavoritedArticleCardProps {
+  articleId: number;
+}
+
+function FavoritedArticleCard({ articleId }: FavoritedArticleCardProps) {
+  const { isLiked, toggle } = useLike(articleId);
   const { isAuthenticated } = useAuth();
-  const { isLiked, toggle } = useLike(id);
 
   const handleLikeClick = () => {
     if (!isAuthenticated) return;
     toggle();
   };
+
+  const { loading, data } = useRequest(() =>
+    alovaInstance.Get("", {
+      params: {
+        action: "query",
+        format: "json",
+        prop: "extracts",
+        explaintext: true,
+        pageids: articleId,
+        origin: "*",
+      },
+    }),
+  );
+
+  console.log(data);
+
+  const { title, extract: content } = data?.query?.pages[articleId] || {};
+  const buttonLink = `/discovery/${articleId}`;
 
   return (
     <Card className="gap-4 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-md">
@@ -34,7 +59,12 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
         />
       </CardHeader>
       <CardContent className="text-muted-foreground flex-grow">
-        <p>{content.length > 120 ? `${content.slice(0, 117)}...` : content}</p>
+        {loading && "Loading..."}
+        {content && (
+          <p>
+            {content.length > 120 ? `${content.slice(0, 117)}...` : content}
+          </p>
+        )}
       </CardContent>
       <CardFooter className="flex justify-end">
         <Button variant="outline" asChild>
@@ -45,4 +75,4 @@ function DiscoveryCard({ id, title, content, buttonLink }: DiscoveryCardProps) {
   );
 }
 
-export default DiscoveryCard;
+export default FavoritedArticleCard;

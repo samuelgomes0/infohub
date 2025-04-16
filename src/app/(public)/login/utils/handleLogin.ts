@@ -29,7 +29,9 @@ function handleLogin(
 
   document.cookie = `wisehub.token=${token}; path=/; max-age=86400; Secure; SameSite=Strict`;
 
-  toast.success("Login successful!");
+  toast.success("Logged in successfully", {
+    description: "You have been logged into your account.",
+  });
   login(token);
 }
 
